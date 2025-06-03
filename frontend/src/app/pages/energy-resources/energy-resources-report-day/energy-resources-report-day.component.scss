@@ -1,0 +1,131 @@
+@use "../../../../styles/mixins" as mixins;
+@use "../../../../styles/variables" as vars;
+
+.content {
+  position: relative;
+  max-width: 1450px;
+  padding-left: 10px;
+}
+
+.dynamic-report {
+  margin: 5px 30px;
+  display: flex;
+  flex-direction: column;
+  &__title-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+  }
+  &__title {
+    margin-bottom: 15px;
+    @include mixins.text-style(24px, 32px, 600, vars.$hulk);
+  }
+  &__date-range {
+    position: relative;
+    max-width: 350px;
+  }
+  &__date-div {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
+  &__date-label {
+    margin-bottom: 10px;
+  }
+  &__date-input {
+    margin-right: 10px;
+    height: 27px;
+    width: 150px;
+    text-align: center;
+    padding: 2px;
+    @include mixins.text-style(14px, 14px, 400, vars.$carbon);
+    font-family: "Bitter", sans-serif;
+
+    background-color: vars.$doctor;
+    border: 1px solid vars.$hulk;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  &__date-input:hover {
+    border-color: vars.$hulk;
+    background-color: vars.$day-on-mercury;
+    transition: background-color 0.3s ease-in-out;
+  }
+  &__date-input:focus {
+    border-color: vars.$dayflower;
+    box-shadow: 0 0 5px rgba(vars.$dayflower, 0.5);
+    background-color: vars.$white;
+    color: vars.$black;
+  }
+  &__date-input:disabled {
+    background-color: vars.$christmas-silver;
+    color: vars.$million-grey;
+    border-color: vars.$gainsboro;
+  }
+  &__date-input::-webkit-calendar-picker-indicator {
+    color: vars.$dayflower;
+    cursor: pointer;
+  }
+  &__data-error {
+    display: none;
+    text-align: center;
+    @include mixins.text-style(24px, 24px, 400, vars.$red);
+  }
+  &__table {
+    position: relative;
+  }
+  &__table-header {
+    margin-bottom: 5px;
+    @include mixins.text-style(18px, 18px, 600, vars.$black);
+  }
+  &__report-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Фиксированный макет таблицы */
+  }
+  &__report-header {
+    padding: 10px;
+    text-align: center;
+    @include mixins.text-style(14px, 14px, 600, vars.$white);
+    font-family: "Bitter", sans-serif;
+    border: 1px solid vars.$steam;
+    background-color: vars.$hulk;
+  }
+  &__report-cell {
+    @include mixins.text-style(16px, 16px, 400, vars.$black);
+    text-align: center;
+  }
+  &__report-table th,
+  &__report-table td {
+    border: 1px solid vars.$steam;
+    padding: 2px;
+  }
+  &__report-table th:first-child,
+  &__report-table td:first-child {
+    white-space: nowrap;
+  }
+  &__error-message {
+    color: vars.$red;
+  }
+  &__total-cell {
+    font-weight: bold;
+    background-color: vars.$hulk;
+    color: vars.$white;
+    text-align: center;
+  }
+  &__total-value {
+    background-color: vars.$yellow;
+  }
+}
+/* Скрыть спиннеры во всех основных браузерах */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Убираем спиннеры в WebKit-браузерах */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

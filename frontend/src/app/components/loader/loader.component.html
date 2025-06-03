@@ -1,0 +1,4 @@
+<div *ngIf="isVisible" class="loading-container">
+  <mat-spinner [style.width]="width" [style.height]="height"></mat-spinner>
+  <div class="loading-text" [style.color]="textColor">{{ loadingText }}</div>
+</div>

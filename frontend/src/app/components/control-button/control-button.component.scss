@@ -1,0 +1,73 @@
+@use "../../../styles/mixins" as mixins;
+@use "../../../styles/variables" as vars;
+
+.control-button {
+  padding: 2px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  height: 100%;
+  @include mixins.text-style(16px, 20px, 600, vars.$hulk);
+  border: 1px solid vars.$hulk;
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  cursor: pointer;
+  outline: none;
+
+  @media (max-width: 1280px) {
+    padding: 2px;
+    @include mixins.text-style(12px, 16px, 600, vars.$hulk);
+  }
+
+  &:hover {
+    color: vars.$white;
+    background-color: vars.$hulk;
+  }
+
+  &:active {
+    color: vars.$white;
+    background-color: vars.$hulk;
+  }
+
+  // &:focus {
+  //   color: vars.$white;
+  //   background-color: vars.$hulk;
+  // }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+
+    // Отключаем эффект наведения при disabled
+    &:hover {
+      color: vars.$hulk; // Убираем изменение цвета
+      background-color: transparent; // Убираем изменение фона
+    }
+    &:active {
+      color: vars.$hulk; // Убираем изменение цвета
+      background-color: transparent; // Убираем изменение фона
+    }
+  }
+
+  &.active-button {
+    background-color: green ; // Цвет фона для активной кнопки
+    color: white ; // Цвет текста для активной кнопки
+  }
+}
+.control-icon {
+  height: 24px;
+  width: 24px;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+@media (max-width: 1280px) {
+  .control-icon {
+    height: 16px;
+    width: 16px;
+    font-size: 16px;
+    line-height: 16px;
+  }
+}
+
+

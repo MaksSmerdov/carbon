@@ -1,0 +1,11 @@
+<app-universal-graph
+  [apiUrls]="apiUrls"
+  [parameterNamesList]="parameterNamesList"
+  [units]="'°C'"
+  [dataKeys]="dataKeys"
+  [yAxisTitle]="'Температуры, градусы'"
+  [title]="'Сушилка №' + sushilkaNumber + ': Температура'"
+  [yAxisRange]="{ min: 0, max: 600 }"
+  [graphId]="sushilkaId"
+  [timeRange]="timeRange"
+></app-universal-graph>

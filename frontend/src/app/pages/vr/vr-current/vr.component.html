@@ -1,0 +1,59 @@
+<app-loader
+  *ngIf="isLoading"
+  [delay]="2000"
+  [loadingText]="'Подождите, идет загрузка данных...'"
+></app-loader>
+
+<div class="current-container" *ngIf="!isLoading" @fadeIn>
+  <app-header-current-params
+    [title]="'Печь карбонизации №' + id.replace('vr', '')"
+    [mode]="mode"
+    [notisStatus]="notisData?.status ?? null"
+    [vrTime]="timeData?.currentTime ?? null"
+  ></app-header-current-params>
+
+  <div class="tables">
+    <app-general-table
+      [title]="'Текущие параметры (температура)'"
+      [data]="sortedTemperatures || {}"
+      [unit]="'°C'"
+      [recommendedValues]="recommendedTemperatures"
+      [highlightedKeys]="getHighlightedKeys()"
+      [disableSorting]="true"
+    ></app-general-table>
+    <app-general-table
+      [title]="'Текущие параметры (уровни)'"
+      [data]="data?.levels || {}"
+      [unit]="' мм'"
+      [recommendedValues]="recommendedLevels"
+      [highlightedKeys]="getHighlightedKeys()"
+    ></app-general-table>
+    <app-general-table
+      [title]="'Текущие параметры (давления)'"
+      [data]="data?.pressures || {}"
+      [unit]="' кгс/м²'"
+      [recommendedValues]="recommendedPressures"
+      [highlightedKeys]="getHighlightedKeys()"
+    ></app-general-table>
+    <app-general-table
+      [title]="'Текущие параметры (разрежения)'"
+      [data]="sortedVacuums || {}"
+      [unit]="' кгс/м²'"
+      [recommendedValues]="recommendedVacuums"
+      [highlightedKeys]="getHighlightedKeys()"
+      [disableSorting]="true"
+    ></app-general-table>
+    <app-general-table
+      [title]="'Текущие параметры (IM)'"
+      [data]="data?.im || {}"
+    ></app-general-table>
+    <app-general-table
+      [title]="'Текущие параметры (горелка)'"
+      [data]="data?.gorelka || {}"
+    ></app-general-table>
+    <app-general-table
+      [title]="'Текущие параметры (нотисы)'"
+      [data]="notisData?.data || {}"
+    ></app-general-table>
+  </div>
+</div>

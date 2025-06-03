@@ -1,0 +1,349 @@
+@use "../../../../styles/mixins" as mixins;
+@use "../../../../styles/variables" as vars;
+
+.mnemo {
+  position: relative;
+  width: 1316px;
+  margin: 0 auto;
+  margin-top: 10px;
+
+  &__img {
+    width: 1316px;
+  }
+
+  &__gif {
+    position: absolute;
+    z-index: 1;
+
+    &-1 img {
+      width: 35px;
+    }
+
+    &-2 {
+      bottom: 3%;
+      right: 47.5%;
+
+      & img {
+        width: 65px;
+        height: 60px;
+        animation: rotate 1s infinite linear;
+        animation-play-state: paused;
+      }
+    }
+  }
+}
+
+.mnemo__param {
+  margin: 0;
+  position: absolute;
+  z-index: 2;
+  border: 1px solid vars.$hulk;
+
+  &-box {
+    padding: 5px;
+    background-color: lightgrey;
+    border: 2px solid green;
+
+    &-db {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    & div {
+      position: static;
+    }
+  }
+
+  &-flex {
+    padding: 5px 5px 5px 0px;
+    display: flex;
+  }
+
+  &-val {
+    width: 55px;
+    background-color: rgb(218, 215, 215);
+    padding: 2px;
+
+    &-p {
+      width: 80px;
+      padding: 2px;
+      background-color: rgb(168, 243, 168);
+      border-left: transparent;
+    }
+
+    &-vozduh {
+      padding: 2px;
+      background-color: rgb(168, 243, 168);
+    }
+  }
+
+  &-text {
+    @include mixins.text-style(13px, 14px, 600, vars.$black);
+  }
+
+  &-descr {
+    position: absolute;
+    @include mixins.text-style(14px, 14px, 600, rgb(10, 59, 10));
+    text-align: center;
+
+    &-left {
+      width: 40px;
+      color: vars.$black;
+      background-color: vars.$hobgoblin;
+      padding: 5px 0px;
+    }
+
+    &-right {
+      width: 40px;
+      color: vars.$black;
+      background-color: vars.$orange;
+      padding: 5px 0px;
+    }
+
+    &-vozduh {
+      color: vars.$black;
+      background-color: vars.$orange;
+      padding: 3px;
+    }
+
+    &-borov {
+      font-size: 12px;
+      width: 60px;
+      padding: 3px;
+      padding-left: 0;
+      padding-right: 0;
+      background-color: rgb(173, 173, 173);
+      color: vars.$black;
+    }
+  }
+}
+
+.mnemo__param-box-vr:nth-child(1) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.mnemo__param-box-vr:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.vr {
+  display: flex;
+  position: absolute;
+  top: 16%;
+  right: 40.5%;
+}
+
+::ng-deep .custom-tooltip {
+  white-space: pre-line; /* Поддержка переносов строк */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.table-mpa {
+  @include mixins.position(absolute, 10%, 13%, null, null);
+  z-index: 1;
+}
+
+.lab-current {
+  position: absolute;
+  top: 42%;
+  right: 13%;
+  z-index: 2;
+}
+
+.mnemo__param-box--btns {
+  position: absolute;
+  display: flex;
+}
+
+.brd-transparent {
+  border-left: transparent;
+}
+
+.brd-bottom-transparent {
+  border-bottom: transparent;
+}
+
+.dym-borov-text {
+  @include mixins.position(null, null, 26%, 39%, null);
+}
+
+.regenerator-text {
+  @include mixins.position(null, 13%, 42.5%, null, null);
+}
+
+.vd {
+  @include mixins.position(absolute, 7.5%, null, null, 12.8%);
+}
+
+.vb {
+  @include mixins.position(absolute, 7.5%, null, null, 35.4%);
+}
+
+.sd {
+  @include mixins.position(absolute, 32%, null, null, 12.8%);
+}
+
+.sb {
+  @include mixins.position(absolute, 32%, null, null, 29.3%);
+}
+
+.nd {
+  @include mixins.position(absolute, null, null, 29.6%, 12.8%);
+}
+
+.nb {
+  @include mixins.position(absolute, null, null, 29.6%, 29.3%);
+}
+
+.db {
+  @include mixins.position(absolute, null, 27.5%, 15%, null);
+}
+
+.ks {
+  @include mixins.position(absolute, null, null, 29.6%, 7%);
+}
+
+.vozduh-left {
+  @include mixins.position(absolute, null, null, 19%, 12.8%);
+}
+
+.vozduh-right {
+  @include mixins.position(absolute, null, null, 19%, 34.56%);
+}
+
+.p-vozduh-left {
+  @include mixins.position(absolute, null, null, 53.4%, 12.86%);
+}
+
+.p-vozduh-right {
+  @include mixins.position(absolute, null, null, 53.4%, 29.3%);
+}
+
+.zilindr {
+  @include mixins.position(absolute, null, null, 30%, 3%);
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1280px) {
+  .mnemo {
+    position: relative;
+    width: 976px;
+  }
+
+  .mnemo__img {
+    width: 976px;
+  }
+
+  .mnemo__gif-2 {
+    bottom: 3%;
+    right: 47.7%;
+
+    & img {
+      width: 45px;
+      height: 45px;
+    }
+  }
+
+  .mnemo__param-text,
+  .mnemo__param-naimenov {
+    font-size: 10px;
+    line-height: 14px;
+  }
+
+  .mnemo__param-descr {
+    font-size: 10px;
+    line-height: 10px;
+  }
+
+  .mnemo__param-descr-left {
+    width: 28px;
+    padding: 5px 0px;
+  }
+
+  .mnemo__param-descr-right {
+    width: 28px;
+    padding: 5px 0px;
+  }
+
+  .mnemo__param-val-vozduh {
+    padding: 0;
+    height: 18px;
+    width: 82px;
+    text-align: center;
+  }
+
+  .mnemo__param-box {
+    padding: 2px;
+  }
+
+  .mnemo__param-flex {
+    padding: 5px 2px 5px 0px;
+    height: 30px;
+  }
+
+  .mnemo__param-val {
+    width: 49px;
+    padding: 0px 5px 0px 5px;
+  }
+
+  .mnemo__param-val-p {
+    width: 65px;
+    padding: 0px 5px 0px 5px;
+  }
+
+  .vr {
+    right: 38.9%;
+  }
+
+  .vb {
+    left: 35%;
+  }
+
+  .sb,
+  .nb {
+    left: 28.5%;
+  }
+
+  .ks {
+    left: 6.9%;
+  }
+
+  .mnemo__param-descr-zilindr {
+    margin-bottom: 1px;
+  }
+
+  .db {
+    bottom: 7.6%;
+    right: 25.7%;
+  }
+
+  .vozduh-right {
+    position: absolute;
+    bottom: 19%;
+    left: 34.9%;
+  }
+
+  .table-mpa {
+    @include mixins.position(absolute, 0%, 5%, null, null);
+  }
+
+  .lab-current {
+    top: 42%;
+    right: 5%;
+  }
+
+}

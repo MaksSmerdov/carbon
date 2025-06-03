@@ -1,0 +1,340 @@
+<app-loader *ngIf="isLoading" [delay]="2000" [loadingText]="'Подождите, идет загрузка данных...'"></app-loader>
+
+<div class="mnemo-container" *ngIf="!isLoading" [@fadeIn]="isImageLoaded ? '*' : 'void'">
+  <div class="mnemo-header">
+    <app-header-current-params [title]="'Печь карбонизации №' + id.replace('vr', '')"
+      [mode]="mode"></app-header-current-params>
+  </div>
+
+  <div class="mnemo">
+    <div class="alarm-table">
+      <app-alarm-table></app-alarm-table>
+    </div>
+
+    <div class="siren-container">
+      <app-siren></app-siren>
+    </div>
+
+    <div *ngIf="timeData" class="mnemo__vr-time">
+      <span class="mnemo__vr-time-title title-reset">Время работы печи:</span>
+      <span class="mnemo__vr-time-value">{{ timeData.currentTime }} (ч:мин)</span>
+    </div>
+
+
+    <div class="mnemo__param-box--btns">
+      <app-control-button [isActive]="isTooltipsEnabled" (onClick)="toggleTooltips()" iconName="visibility ">
+        {{
+        isTooltipsEnabled
+        ? "Выкл. всплывающие подсказки"
+        : "Вкл. всплывающие подсказки"
+        }}
+      </app-control-button>
+
+      <app-control-button (onClick)="openLab()" iconName="science ">
+        Для лаборатории
+      </app-control-button>
+    </div>
+
+    <div class="mnemo__param-box--btn-doc">
+      <app-control-button (onClick)="openDocumentation()" iconName="map ">
+        Документация объекта
+      </app-control-button>
+    </div>
+
+    <div class="mnemo__param-box--btn-lab">
+      <app-control-button (onClick)="openLabInstruction()" iconName="help_outline ">
+        Инструкция для пользователя лаборатория
+      </app-control-button>
+    </div>
+
+    <img class="mnemo__img" src="/img/pech-vr.jpg" (load)="onImageLoad()" />
+    <div class="mnemo__param-descr ot-hvo-text">От ХВО</div>
+    <div class="mnemo__param-descr avarini-sbros-text">Аварийный сброс</div>
+    <div class="mnemo__param-descr par-v-otdelenii-activatsi-text">
+      Пар в отделении активации
+    </div>
+    <div class="mnemo__param-descr borov-soedinitelni-text">
+      Боров соединительный
+    </div>
+    <div class="mnemo__param-descr pech-doziga-gazov-text">
+      Печь дожига газов
+    </div>
+    <div class="mnemo__param-descr dymosos-text">Дымосос</div>
+    <div class="mnemo__param-descr kotel-utilizator-text">Котел утилизатор</div>
+    <div class="mnemo__param-descr vyhod-dymovyh-gazov-text">
+      Выход дымовых газов
+    </div>
+    <div class="mnemo__param-descr mokriy-skruber-text">Мокрый скруббер</div>
+    <div class="mnemo__param-descr topka-text">Топка</div>
+    <div class="mnemo__param-descr vanna-skrubbera-text">Ванна скруббера</div>
+    <div class="mnemo__param-descr goriz-vibrotransporter-text">
+      Вертикальный вибротранспортер
+    </div>
+    <div class="mnemo__param-descr vr-pech-carboniz-text">
+      Вращающаяся печь карбонизации
+    </div>
+    <div class="mnemo__param-descr hvo-text">ХВО</div>
+    <div class="mnemo__param-descr holodilnik-text">Холодильник</div>
+    <div class="mnemo__param-descr grohot-text">Грохот</div>
+    <div class="mnemo__param-descr elevator-text">Элеватор</div>
+    <div class="mnemo__param-descr zagruzka-granul-text">Загрузка гранул</div>
+    <div class="mnemo__param-descr notis-status-text">
+      Статус:
+      <ng-container [ngSwitch]="notisData?.status">
+        <span class="notis-span" *ngSwitchCase="'working'">Идет загрузка</span>
+        <span class="notis-span" *ngSwitchCase="'idle'">Загрузки нет</span>
+        <span class="notis-span" *ngSwitchDefault>Нет данных</span>
+      </ng-container>
+    </div>
+    <div class="mnemo__param-descr niz-zagr-kam-text">
+      Низ загрузочной камеры
+    </div>
+    <div class="mnemo__param-descr vigruzka-kam-text">Камера выгрузки</div>
+    <div class="mnemo__param-descr vniz-kamery-zagruzki-text">
+      Внизу камеры загрузки
+    </div>
+    <div class="mnemo__param-descr vverh-kamery-zagruzki-text">
+      Вверху камеры загрузки
+    </div>
+    <div class="mnemo__param-descr vhod-pechi-doziganiy-text">
+      Вход печи дожигания
+    </div>
+    <div class="mnemo__param-descr vyhod-pechi-doziganiy-text">
+      Выход печи дожигания
+    </div>
+    <div class="mnemo__param-descr zadanie-temper-na-gorelky-text">Задание</div>
+    <div class="mnemo__param-descr first-skolz-text">1-СК</div>
+    <div class="mnemo__param-descr second-skolz-text">2-СК</div>
+    <div class="mnemo__param-descr third-skolz-text">3-СК</div>
+    <div class="mnemo__param-descr im5-text">ИМ5</div>
+
+
+    <div class="mnemo__gif mnemo__gif-1"
+      *ngIf="(data?.gorelka?.['Мощность горелки №' + id.replace('vr', '')] || 0) > 5">
+      <img src="/img/fire-gif.gif" alt="img" />
+    </div>
+
+    <div class="mnemo__gif mnemo__gif-2">
+      <img
+        [ngStyle]="{'animation-play-state': (+(data?.vacuums?.['В котле утилизаторе'] || 0)) < 0 ? 'running' : 'paused'}"
+        src="/img/ventilator.png" alt="img">
+    </div>
+
+    <div class="mnemo__gif mnemo__gif-3" *ngIf="(+(data?.vacuums?.['В котле утилизаторе'] || 0)) < 0">
+      <img src="/img/par.gif" alt="img" />
+    </div>
+
+    <div class="mnemo__gif mnemo__gif-4">
+      <img src="/img/ventilator.png" alt="img">
+    </div>
+    <div class="mnemo__gif mnemo__gif-5">
+      <img src="/img/ventilator.png" alt="img">
+    </div>
+
+    <div class="mnemo__param first-skolz" [class.enabled-hover]="isTooltipsEnabled" [matTooltip]="termopara400"
+      matTooltipPosition="above" matTooltipClass="custom-tooltip" [matTooltipDisabled]="!isTooltipsEnabled">
+      <app-param-indicator [key]="'1-СК'" [value]="data?.temperatures?.['1-СК']" [unit]="'°C'"></app-param-indicator>
+    </div>
+
+    <div class="mnemo__param second-skolz" [class.enabled-hover]="isTooltipsEnabled" [matTooltip]="termopara400"
+      matTooltipPosition="above" matTooltipClass="custom-tooltip" [matTooltipDisabled]="!isTooltipsEnabled">
+      <app-param-indicator [key]="'2-СК'" [value]="data?.temperatures?.['2-СК']" [unit]="'°C'"></app-param-indicator>
+    </div>
+
+    <div class="mnemo__param third-skolz" [class.enabled-hover]="isTooltipsEnabled" [matTooltip]="termopara400"
+      matTooltipPosition="above" matTooltipClass="custom-tooltip" [matTooltipDisabled]="!isTooltipsEnabled">
+      <app-param-indicator [key]="'3-СК'" [value]="data?.temperatures?.['3-СК']" [unit]="'°C'"></app-param-indicator>
+    </div>
+
+    <div class="mnemo__param temper-v-topke" [class.enabled-hover]="isTooltipsEnabled" [matTooltip]="termopara1000"
+      matTooltipPosition="above" matTooltipClass="custom-tooltip" [matTooltipDisabled]="!isTooltipsEnabled">
+      <app-param-indicator [key]="'В топке'" [value]="data?.temperatures?.['В топке']"
+        [unit]="'°C'"></app-param-indicator>
+    </div>
+
+    <div class="mnemo__param vverh-kamery-zagruzki" [class.enabled-hover]="isTooltipsEnabled"
+      [matTooltip]="termopara1000" matTooltipPosition="above" matTooltipClass="custom-tooltip"
+      [matTooltipDisabled]="!isTooltipsEnabled">
+      <app-param-indicator [key]="'Вверху камеры загрузки'" [value]="data?.temperatures?.['Вверху камеры загрузки']"
+        [unit]="'°C'"></app-param-indicator>
+    </div>
+
+    <div class="mnemo__param vniz-kamery-zagruzki" [class.enabled-hover]="isTooltipsEnabled"
+      [matTooltip]="termopara1000" matTooltipPosition="above" matTooltipClass="custom-tooltip"
+      [matTooltipDisabled]="!isTooltipsEnabled">
+      <app-param-indicator [key]="'Внизу камеры загрузки'" [value]="data?.temperatures?.['Внизу камеры загрузки']"
+        [unit]="'°C'"></app-param-indicator>
+    </div>
+
+    <div class="mnemo__param vhod-pechi-doziganiy" [class.enabled-hover]="isTooltipsEnabled"
+      [matTooltip]="termopara1000" matTooltipPosition="above" matTooltipClass="custom-tooltip"
+      [matTooltipDisabled]="!isTooltipsEnabled">
+      <app-param-indicator [key]="'На входе печи дожига'" [value]="data?.temperatures?.['На входе печи дожига']"
+        [unit]="'°C'"></app-param-indicator>
+    </div>
+
+    <div class="mnemo__param vyhod-pechi-doziganiy" [class.enabled-hover]="isTooltipsEnabled"
+      [matTooltip]="termopara1000" matTooltipPosition="above" matTooltipClass="custom-tooltip"
+      [matTooltipDisabled]="!isTooltipsEnabled">
+      <app-param-indicator [key]="'На выходе печи дожига'" [value]="data?.temperatures?.['На выходе печи дожига']"
+        [unit]="'°C'"></app-param-indicator>
+    </div>
+
+    <div class="mnemo__param temper-kamer-vygruz" [class.enabled-hover]="isTooltipsEnabled" [matTooltip]="termopara1000"
+      matTooltipPosition="above" matTooltipClass="custom-tooltip" [matTooltipDisabled]="!isTooltipsEnabled">
+      <app-param-indicator [key]="'Камеры выгрузки'" [value]="data?.temperatures?.['Камеры выгрузки']"
+        [unit]="'°C'"></app-param-indicator>
+    </div>
+
+    <div class="mnemo__param gazy-kotla-utilizazi" [class.enabled-hover]="isTooltipsEnabled"
+      [matTooltip]="termopara1000" matTooltipPosition="above" matTooltipClass="custom-tooltip"
+      [matTooltipDisabled]="!isTooltipsEnabled">
+      <app-param-indicator [key]="'Дымовых газов котла'" [value]="data?.temperatures?.['Дымовых газов котла']"
+        [unit]="'°C'"></app-param-indicator>
+    </div>
+
+    <div class="mnemo__param temper-gazov-do-scrubber" [class.enabled-hover]="isTooltipsEnabled"
+      [matTooltip]="termopara1000" matTooltipPosition="above" matTooltipClass="custom-tooltip"
+      [matTooltipDisabled]="!isTooltipsEnabled">
+      <app-param-indicator [key]="'Газов до скруббера'" [value]="data?.temperatures?.['Газов до скруббера']"
+        [unit]="'°C'"></app-param-indicator>
+    </div>
+
+    <div class="mnemo__param temper-gazov-posle-scrubber" [class.enabled-hover]="isTooltipsEnabled"
+      [matTooltip]="tcm50m" matTooltipPosition="above" matTooltipClass="custom-tooltip"
+      [matTooltipDisabled]="!isTooltipsEnabled">
+      <app-param-indicator [key]="'Газов после скруббера'" [value]="data?.temperatures?.['Газов после скруббера']"
+        [unit]="'°C'"></app-param-indicator>
+    </div>
+
+    <div class="mnemo__param temper-vody-v-vanne-scrubber" [class.enabled-hover]="isTooltipsEnabled"
+      [matTooltip]="tcm50m" matTooltipPosition="above" matTooltipClass="custom-tooltip"
+      [matTooltipDisabled]="!isTooltipsEnabled">
+      <app-param-indicator [key]="'Воды в ванне скруббера'" [value]="data?.temperatures?.['Воды в ванне скруббера']"
+        [unit]="'°C'"></app-param-indicator>
+    </div>
+
+    <div class="mnemo__param granul-posle-holodil" [class.enabled-hover]="isTooltipsEnabled" [matTooltip]="tcm50m"
+      matTooltipPosition="above" matTooltipClass="custom-tooltip" [matTooltipDisabled]="!isTooltipsEnabled">
+      <app-param-indicator [key]="'Гранул после холод-ка'" [value]="data?.temperatures?.['Гранул после холод-ка']"
+        [unit]="'°C'"></app-param-indicator>
+    </div>
+
+    <div class="mnemo__param uroven-vanne-scrubber">
+      <app-param-indicator [key]="'В ванне скруббера'" [value]="data?.levels?.['В ванне скруббера']?.value"
+        [unit]="'мм'"></app-param-indicator>
+    </div>
+
+    <div class="mnemo__param uroven-vody-hvo">
+      <app-param-indicator [key]="'В емкости ХВО'" [value]="data?.levels?.['В емкости ХВО']?.value"
+        [unit]="'мм'"></app-param-indicator>
+    </div>
+
+    <div class="mnemo__param uroven-v-barabane-kotla" [class.enabled-hover]="isTooltipsEnabled"
+      [matTooltip]="vBarabaneKotla" matTooltipPosition="above" matTooltipClass="custom-tooltip"
+      [matTooltipDisabled]="!isTooltipsEnabled">
+      <app-param-indicator [key]="'В барабане котла'" [value]="data?.levels?.['В барабане котла']?.value"
+        [unit]="'мм'"></app-param-indicator>
+    </div>
+
+    <div class="mnemo__param p-gazov-posle-scrubber" [class.enabled-hover]="isTooltipsEnabled"
+      [matTooltip]="davlScrubber" matTooltipPosition="above" matTooltipClass="custom-tooltip"
+      [matTooltipDisabled]="!isTooltipsEnabled">
+      <app-param-indicator [key]="'Давление газов после скруббера'"
+        [value]="data?.pressures?.['Давление газов после скруббера']" [unit]="'кгс/м²'"></app-param-indicator>
+    </div>
+
+    <div class="mnemo__param p-v-barabane-kotla" [class.enabled-hover]="isTooltipsEnabled" [matTooltip]="davlKotel"
+      matTooltipPosition="above" matTooltipClass="custom-tooltip" [matTooltipDisabled]="!isTooltipsEnabled">
+      <span class="mnemo__param-text">
+        {{ data?.pressures?.['Пара в барабане котла'] || '—' }} кгс/см²
+      </span>
+    </div>
+
+    <div class="mnemo__param razr-v-topke" [class.enabled-hover]="isTooltipsEnabled" [matTooltip]="davlTopka"
+      matTooltipPosition="above" matTooltipClass="custom-tooltip" [matTooltipDisabled]="!isTooltipsEnabled">
+      <app-param-indicator [key]="'В топке печи'" [value]="data?.vacuums?.['В топке печи']"
+        [unit]="'кгс/м²'"></app-param-indicator>
+    </div>
+
+    <div class="mnemo__param razr-v-prostranstve-kotla" [class.enabled-hover]="isTooltipsEnabled"
+      [matTooltip]="davlNizKamery" matTooltipPosition="above" matTooltipClass="custom-tooltip"
+      [matTooltipDisabled]="!isTooltipsEnabled">
+      <app-param-indicator [key]="'В котле утилизаторе'" [value]="data?.vacuums?.['В котле утилизаторе']"
+        [unit]="'кгс/м²'"></app-param-indicator>
+    </div>
+
+    <div class="mnemo__param razr-niz-zagr-kam" [class.enabled-hover]="isTooltipsEnabled" [matTooltip]="davlNizKamery"
+      matTooltipPosition="above" matTooltipClass="custom-tooltip" [matTooltipDisabled]="!isTooltipsEnabled">
+      <app-param-indicator [key]="'Низ загрузочной камеры'" [value]="data?.vacuums?.['Низ загрузочной камеры']"
+        [unit]="'кгс/м²'"></app-param-indicator>
+    </div>
+
+    <div class="mnemo__param im5-percent">
+      <span class="mnemo__param-text">
+        {{ data?.im?.['ИМ5 котел-утилизатор'] || '—' }} %
+      </span>
+    </div>
+
+    <div class="mnemo__param mosh-gorelky">
+      <span class="mnemo__param-text">
+        {{ data?.gorelka?.['Мощность горелки №' + id.replace('vr', '')] || '—' }}
+        %
+      </span>
+    </div>
+
+    <div class="mnemo__param zadanie-temper-na-gorelky">
+      <span class="mnemo__param-text">
+        {{ data?.gorelka?.['Задание температуры на горелку №' + id.replace('vr', '')] || '—' }}
+        °C
+      </span>
+    </div>
+
+    <div class="mnemo__param doza-notis">
+      <span class="mnemo__param-text">
+        {{ notisData?.data?.['Доза (кг/ч) НОТИС' + id.replace('vr', '')] || '—' }}
+        кг/ч
+      </span>
+    </div>
+
+    <app-level-indicator [value]="data?.levels?.['В барабане котла']?.value" [minLevel]="-200" [maxLevel]="200"
+      [totalRange]="400" [width]="'57px'" [height]="'89px'" [bottom]="'65.7%'" [right]="'46.4%'" [fillColor]="'#57b7f7'"
+      [adaptiveWidth]="'42px'" [adaptiveHeight]="'64px'" [warningThreshold]="25">
+    </app-level-indicator>
+
+    <app-level-indicator [value]="data?.levels?.['В емкости ХВО']?.value" [minLevel]="0" [maxLevel]="6000"
+      [totalRange]="6000" [width]="'41px'" [height]="'40px'" [bottom]="'14.5%'" [right]="'56.7%'"
+      [adaptiveWidth]="'28px'" [adaptiveHeight]="'30px'" [adaptiveRight]="'56.9%'" [fillColor]="'#57b7f7'"
+      [warningThreshold]="25">
+    </app-level-indicator>
+
+    <app-level-indicator [value]="data?.levels?.['В ванне скруббера']?.value" [minLevel]="0" [maxLevel]="1000"
+      [totalRange]="1000" [width]="'292px'" [height]="'139px'" [bottom]="'2.7%'" [right]="'12%'" [fillColor]="'#57b7f7'"
+      [adaptiveWidth]="'217px'" [adaptiveHeight]="'105px'" [adaptiveBottom]="'3%'" [warningThreshold]="25">
+    </app-level-indicator>
+
+    <app-mnemo-kran class="kran kran-1" [isActive]="!!data?.im?.['ИМ1 скруббер']" [triangleWidth]="15"
+      [triangleHeight]="12" [triangleWidthSmall]="12" [triangleHeightSmall]="10">
+    </app-mnemo-kran>
+
+    <app-mnemo-kran class="kran kran-2" [isActive]="!!data?.im?.['ИМ2 ХВО']" [triangleWidth]="10" [triangleHeight]="10"
+      [triangleWidthSmall]="8" [triangleHeightSmall]="8">
+    </app-mnemo-kran>
+
+    <app-mnemo-kran class="kran kran-3" [isActive]="!!data?.im?.['ИМ3 аварийный сброс']" [triangleWidth]="15"
+      [triangleHeight]="12" [triangleWidthSmall]="12" [triangleHeightSmall]="10">
+    </app-mnemo-kran>
+
+    <app-mnemo-kran class="kran kran-4" [isActive]="!!data?.im?.['ИМ4 пар в отделение активации']" [triangleWidth]="15"
+      [triangleHeight]="12" [triangleWidthSmall]="12" [triangleHeightSmall]="10">
+    </app-mnemo-kran>
+
+    <app-mnemo-kran class="kran kran-5" [isActive]="isKran5Active()" [triangleWidth]="15" [triangleHeight]="12"
+      [triangleWidthSmall]="12" [triangleHeightSmall]="10">
+    </app-mnemo-kran>
+
+    <div class="lab-current">
+      <app-lab-current [id]="id"></app-lab-current>
+    </div>
+  </div>
+</div>

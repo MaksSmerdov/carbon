@@ -1,0 +1,32 @@
+@use "../../../styles/mixins" as mixins;
+@use "../../../styles/variables" as vars;
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid vars.$cerebral-grey;
+  &__title {
+    text-decoration: none;
+    @include mixins.text-style(24px, 24px, 600, vars.$stone-cold);
+  }
+  &__close-btn {
+    position: absolute;
+    top: 8px;
+    right: 22px;
+    color: vars.$stone-cold;
+    cursor: pointer;
+    transition: background-color .3s ease-in-out;
+    outline: none;
+    &:hover {
+      background-color: vars.$plaster;
+    }
+    &:active {
+      background-color: vars.$plaster;
+    }
+    &:focus {
+      background-color: vars.$plaster;
+    }
+  }
+}

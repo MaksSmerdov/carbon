@@ -1,0 +1,70 @@
+<app-loader *ngIf="isLoading" [delay]="2000" [loadingText]="'Подождите, идет загрузка данных...'"
+  (loadingComplete)="onLoadingComplete()"></app-loader>
+
+<div class="current-container energy-resources-current" *ngIf="!isLoading" [@fadeIn]="isDataLoaded ? '*' : 'void'">
+  <app-header-current-params [title]="'Текущие параметры узлов учета'"></app-header-current-params>
+
+  <div class="tables">
+    <table class="energy-resources__table">
+      <caption class="energy-resources__title">Генерация пара</caption>
+      <thead class="energy-resources__table-head">
+        <tr class="energy-resources__table-row">
+          <th class="energy-resources__table-header">Наименование узла учета</th>
+          <th class="energy-resources__table-header">Типоразмер</th>
+          <th class="energy-resources__table-header">Гкал/ч</th>
+          <th class="energy-resources__table-header">Куб/ч</th>
+          <th class="energy-resources__table-header">Тонн/ч</th>
+          <th class="energy-resources__table-header">Давление (МПа)</th>
+          <th class="energy-resources__table-header">Температура (°C)</th>
+        </tr>
+      </thead>
+      <tbody class="energy-resources__table-body">
+        <tr class="energy-resources__table-row" *ngFor="let item of otherKeys">
+          <td class="energy-resources__table-cell">{{ getDeviceName(item.key) }}</td>
+          <td class="energy-resources__table-cell ">{{ item.typeSize }}</td>
+          <td class="energy-resources__table-cell value">{{ energyResources[item.key].data["Гкал/ч " +
+            energyResources[item.key].device] }}</td>
+          <td class="energy-resources__table-cell value">{{ energyResources[item.key].data["Куб/ч " +
+            energyResources[item.key].device] }}</td>
+          <td class="energy-resources__table-cell value">{{ energyResources[item.key].data["Тонн/ч " +
+            energyResources[item.key].device] }}</td>
+          <td class="energy-resources__table-cell value">{{ energyResources[item.key].data["Давление " +
+            energyResources[item.key].device] }}</td>
+          <td class="energy-resources__table-cell value">{{ energyResources[item.key].data["Температура " +
+            energyResources[item.key].device] }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="energy-resources__table">
+      <caption class="energy-resources__title">Потребление пара</caption>
+      <thead class="energy-resources__table-head">
+        <tr class="energy-resources__table-row">
+          <th class="energy-resources__table-header ">Наименование узла учета</th>
+          <th class="energy-resources__table-header">Типоразмер</th>
+          <th class="energy-resources__table-header">Гкал/ч</th>
+          <th class="energy-resources__table-header">Куб/ч</th>
+          <th class="energy-resources__table-header">Тонн/ч</th>
+          <th class="energy-resources__table-header">Давление (МПа)</th>
+          <th class="energy-resources__table-header">Температура (°C)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="energy-resources__table-row" *ngFor="let item of mpaKeys">
+          <td class="energy-resources__table-cell ">{{ getDeviceName(item.key) }}</td>
+          <td class="energy-resources__table-cell ">{{ item.typeSize }}</td>
+          <td class="energy-resources__table-cell value">{{ energyResources[item.key].data["Гкал/ч " +
+            energyResources[item.key].device] }}</td>
+          <td class="energy-resources__table-cell value">{{ energyResources[item.key].data["Куб/ч " +
+            energyResources[item.key].device] }}</td>
+          <td class="energy-resources__table-cell value">{{ energyResources[item.key].data["Тонн/ч " +
+            energyResources[item.key].device] }}</td>
+          <td class="energy-resources__table-cell value">{{ energyResources[item.key].data["Давление " +
+            energyResources[item.key].device] }}</td>
+          <td class="energy-resources__table-cell value">{{ energyResources[item.key].data["Температура " +
+            energyResources[item.key].device] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

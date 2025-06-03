@@ -1,0 +1,40 @@
+<div class="lab-last-day">
+  <div class="lab-last-day__loader" *ngIf="isLoading">
+    <app-loader [loadingText]="'Загрузка данных...'" (loadingComplete)="isLoading = false"></app-loader>
+  </div>
+
+  <div class="lab-last-day__empty" *ngIf="!isLoading && labData.length === 0">
+    Нет данных за последние сутки
+  </div>
+
+  <table class="lab-last-day__table" *ngIf="!isLoading && labData.length > 0" @fadeIn>
+    <thead class="lab-last-day__table-head">
+      <tr class="lab-last-day__table-row">
+        <th class="lab-last-day__table-header">Дата</th>
+        <th class="lab-last-day__table-header">Время</th>
+        <th class="lab-last-day__table-header">Летучие в-ва, %</th>
+        <th class="lab-last-day__table-header" *ngIf="!isMPA">pH</th>
+        <th class="lab-last-day__table-header" *ngIf="!isMPA">Суммарка</th>
+        <th class="lab-last-day__table-header">Действия</th>
+      </tr>
+    </thead>
+    <tbody class="lab-last-day__table-body">
+      <tr class="lab-last-day__table-row" *ngFor="let item of labData">
+        <td class="lab-last-day__table-cell">{{ item.recordDate }}</td>
+        <td class="lab-last-day__table-cell">{{ item.recordTime }}</td>
+        <td class="lab-last-day__table-cell">{{ item.value || '-' }}</td>
+        <td class="lab-last-day__table-cell" *ngIf="!isMPA">{{ item.valuePH || '-' }}</td>
+        <td class="lab-last-day__table-cell" *ngIf="!isMPA">{{ item.valueSUM || '-' }}</td>
+        <td class="lab-last-day__table-cell">
+          <button
+            class="lab-last-day__delete-btn"
+            (click)="deleteRecord(item._id)"
+          >
+            <mat-icon>delete_outline</mat-icon>
+            <span>Удалить</span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

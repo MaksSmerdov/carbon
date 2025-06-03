@@ -1,0 +1,16 @@
+<button
+  class="control-button btn-reset"
+  [ngClass]="buttonClass"
+  [disabled]="isDisabled"
+  [style.border-radius]="borderRadius"
+  [style.padding-top]="paddingTop"
+  [style.padding-bottom]="paddingBottom"
+  [style.padding-left]="paddingLeft"
+  [style.padding-right]="paddingRight"
+  (click)="onClick.emit($event)">
+
+  <!-- Материал Иконка с дополнительным классом -->
+  <mat-icon *ngIf="iconName" class="control-icon">{{ iconName }}</mat-icon>
+
+  <ng-content></ng-content>
+</button>

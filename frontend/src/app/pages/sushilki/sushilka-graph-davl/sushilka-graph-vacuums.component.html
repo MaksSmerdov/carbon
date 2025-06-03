@@ -1,0 +1,11 @@
+<app-universal-graph
+  [apiUrls]="apiUrls"
+  [parameterNamesList]="parameterNamesList"
+  [units]="'кгс/см²'"
+  [dataKeys]="dataKeys"
+  [yAxisTitle]="'Разрежение, кгс/см²'"
+  [title]="'Сушилка №' + sushilkaNumber + ': Разрежение'"
+  [yAxisRange]="{ min: -50, max: 50 }"
+  [graphId]="sushilkaId"
+  [timeRange]="timeRange"
+></app-universal-graph>

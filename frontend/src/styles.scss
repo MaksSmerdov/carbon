@@ -1,0 +1,160 @@
+/* You can add global styles to this file, and also import other style files */
+@use "../src/styles/mixins" as mixins;
+@use "../src/styles/variables" as vars;
+@use "../src/styles/fonts";
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Bitter", sans-serif;
+}
+
+body::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+  /* ширина scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background-color: vars.$coconut-white;
+  /* цвет дорожки */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: vars.$hulk;
+  /* цвет плашки */
+  border-radius: 20px;
+  /* закругления плашки */
+}
+
+.list-reset {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.title-reset {
+  margin: 0;
+}
+
+.custom-tooltip {
+  white-space: pre-line; /* Разрешает переносы строк */
+}
+
+.btn-reset {
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0px;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+}
+
+.mnemo__param {
+  padding: 2px;
+  margin: 0;
+  position: absolute;
+  cursor: pointer;
+  z-index: 100;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out,
+  box-shadow 0.3s ease-in-out;
+
+  &.enabled-hover {
+    &:hover {
+      background-color: vars.$hulk;
+
+      .mnemo__param-text {
+        color: vars.$white;
+      }
+    }
+
+    &:active {
+      box-shadow: 0 0 0 3px vars.$white, 0 0 0 6px vars.$hulk;
+
+      .mnemo__param-text {
+        color: vars.$white;
+      }
+    }
+  }
+}
+
+.mnemo__param-text {
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.current-container,
+.mnemo-container {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.mat-expansion-panel:not(.mat-expanded)
+  .mat-expansion-panel-header:not([aria-disabled="true"]) {
+  transition: background 0.3s ease-in-out;
+}
+
+.content-title {
+  @include mixins.text-style(20px, 20px, 600, vars.$hulk);
+}
+
+// tabs
+.mat-mdc-tab .mdc-tab-indicator__content--underline {
+  border-color: green !important;
+}
+
+.mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs
+  > .mat-mdc-tab-header
+  .mat-mdc-tab {
+  transition: background-color 0.3s ease-in-out;
+  max-width: 200px;
+}
+
+.mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs
+  > .mat-mdc-tab-header
+  .mat-mdc-tab:hover {
+  background-color: vars.$lynx-white !important;
+}
+
+.mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs
+  > .mat-mdc-tab-header
+  .mat-mdc-tab:active {
+  background-color: vars.$lynx-white !important;
+}
+
+//calendar
+.mat-calendar-body-selected {
+  background-color: vars.$hulk !important;
+}
+
+.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
+  > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(
+    .mat-calendar-body-comparison-identical
+  ) {
+  background-color: rgba(vars.$hulk, 0.3) !important;
+}
+
+//angular-material
+.mat-body,
+.mat-body-2,
+.mat-typography .mat-body,
+.mat-typography .mat-body-2,
+.mat-typography {
+  font-family: "Bitter", sans-serif !important;
+}
+
+//preloader
+.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle,
+.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: vars.$hulk !important;
+}

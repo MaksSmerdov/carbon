@@ -1,0 +1,647 @@
+.mnemo {
+  position: relative;
+  width: 1316px;
+
+  &-header {
+    padding-bottom: 10px;
+    max-width: 1080px;
+  }
+
+  &-container {
+    position: relative;
+    max-width: 1450px;
+    padding-left: 10px;
+  }
+
+  &__img {
+    width: 1316px;
+  }
+
+  &__vr-time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    top: 52%;
+    left: 43%;
+    z-index: 1;
+  }
+  &__vr-time-title {
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 600;
+    color: blue;
+  }
+  &__vr-time-value {
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 600;
+    color: black;
+  }
+
+  &__gif {
+    position: absolute;
+    z-index: 1;
+
+    &-1 {
+      top: 62.7%;
+      left: 61.2%;
+      transform: rotate(180deg);
+    }
+
+    &-2 {
+      top: 28%;
+      left: 74%;
+      background-color: grey;
+      border-radius: 50%;
+      border: 1px solid black;
+
+      & img {
+        width: 49px;
+        height: 49px;
+        animation: rotate 1s infinite linear;
+        animation-play-state: paused;
+      }
+    }
+
+    &-3 {
+      top: 35.4%;
+      right: -50px;
+
+      & img {
+        width: 50px;
+        transform: rotate(90deg);
+      }
+    }
+
+    &-4 {
+      top: 4.5%;
+      left: 18.5%;
+    }
+
+    &-5 {
+      top: 14%;
+      left: 18.5%;
+    }
+
+    &-4,
+    &-5 {
+      & img {
+        width: 38px;
+        height: 38px;
+      }
+    }
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.alarm-table {
+  position: absolute;
+  top: -132px;
+  right: -175px;
+}
+
+.mnemo__param {
+  padding: 1px;
+  background-color: white;
+
+  &-text {
+    font-size: 18px;
+    line-height: 16px;
+    color: green;
+    font-weight: 600;
+  }
+
+  &-descr {
+    position: absolute;
+    z-index: 1;
+    font-size: 14px;
+    line-height: 14px;
+    color: rgb(10, 59, 10);
+    font-weight: 600;
+    text-align: center;
+  }
+
+  &-box--btns {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+  &-box--btn-doc {
+    position: absolute;
+    top: 43%;
+    left: 17%;
+    z-index: 1;
+  }
+  &-box--btn-lab {
+    position: absolute;
+    top: 39%;
+    left: 17%;
+    z-index: 1;
+  }
+}
+
+.blink-warning {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    color: green;
+  }
+  50% {
+    color: red;
+  }
+}
+
+.notis-span {
+  color: blue;
+}
+
+.kran {
+  position: absolute;
+
+  &-1 {
+    bottom: 6.8%;
+    right: 5%;
+  }
+
+  &-2 {
+    bottom: 12.9%;
+    right: 62%;
+  }
+
+  &-3 {
+    top: 0.6%;
+    right: 48%;
+  }
+
+  &-4 {
+    top: 0.6%;
+    right: 28%;
+  }
+
+  &-5 {
+    top: 14.7%;
+    left: 35.5%;
+  }
+
+  &-6 {
+    top: 15%;
+    left: 35.65%;
+  }
+}
+
+.siren-container {
+  position: absolute;
+  z-index: 1;
+  top: 420px;
+  left: 620px;
+}
+
+// Позиционирование параметров
+// Температуры
+.first-skolz {
+  top: 64%;
+  left: 47.8%;
+}
+
+.second-skolz {
+  top: 64%;
+  left: 36%;
+}
+
+.third-skolz {
+  top: 64%;
+  left: 18.5%;
+}
+
+.temper-v-topke {
+  top: 66%;
+  right: 37.5%;
+}
+
+.vverh-kamery-zagruzki {
+  left: 7.5%;
+  bottom: 37%;
+}
+
+.vniz-kamery-zagruzki {
+  left: 7.5%;
+  bottom: 46%;
+}
+
+.vhod-pechi-doziganiy {
+  left: 7.5%;
+  bottom: 56%;
+}
+
+.vyhod-pechi-doziganiy {
+  top: 29%;
+  left: 37%;
+}
+
+.temper-kamer-vygruz {
+  top: 80%;
+  right: 41.8%;
+}
+
+.gazy-kotla-utilizazi {
+  top: 34%;
+  left: 54.5%;
+}
+
+.temper-gazov-do-scrubber {
+  top: 29%;
+  right: 30%;
+}
+
+.temper-gazov-posle-scrubber {
+  top: 36%;
+  right: 0;
+}
+
+.temper-vody-v-vanne-scrubber {
+  bottom: 10%;
+  right: 15%;
+  z-index: 1;
+  background-color: transparent;
+}
+
+.granul-posle-holodil {
+  bottom: 22%;
+  left: 28%;
+}
+
+// Уровни
+.uroven-vanne-scrubber {
+  bottom: 10%;
+  right: 26%;
+  z-index: 1;
+  background-color: transparent;
+}
+
+.uroven-vody-hvo {
+  bottom: 9%;
+  left: 39%;
+}
+
+.uroven-v-barabane-kotla {
+  top: 25.5%;
+  left: 54.5%;
+}
+
+// Давления
+.p-gazov-posle-scrubber {
+  bottom: 54%;
+  right: -3%;
+}
+
+.p-v-barabane-kotla {
+  top: 15%;
+  right: 30.7%;
+}
+
+// Разрежения
+.razr-v-topke {
+  top: 73%;
+  right: 38%;
+}
+
+.razr-v-prostranstve-kotla {
+  top: 31%;
+  left: 54.5%;
+}
+
+.razr-niz-zagr-kam {
+  left: 7.5%;
+  bottom: 28%;
+}
+
+// ИМ, горелка, нотис
+.im5-percent {
+  top: 12%;
+  left: 35.5%;
+}
+
+.mosh-gorelky {
+  top: 61%;
+  right: 38%;
+}
+
+.zadanie-temper-na-gorelky {
+  top: 69.5%;
+  right: 30%;
+}
+
+.doza-notis {
+  bottom: 9%;
+  left: 7%;
+}
+// ------------------------------
+// Позиционирование текста
+.first-skolz-text {
+  top: 62.5%;
+  left: 48%;
+}
+
+.second-skolz-text {
+  top: 62.5%;
+  left: 36%;
+}
+
+.third-skolz-text {
+  top: 62.5%;
+  left: 18.5%;
+}
+
+.vhod-pechi-doziganiy-text {
+  text-align: left;
+  max-width: 87px;
+  left: 7.5%;
+  top: 37%;
+}
+
+.vyhod-pechi-doziganiy-text {
+  text-align: left;
+  max-width: 87px;
+  left: 37%;
+  top: 25%;
+}
+
+.zadanie-temper-na-gorelky-text {
+  font-size: 14px;
+  right: 29.9%;
+  bottom: 31%;
+  color: blue;
+  background-color: white;
+  padding: 2px;
+}
+
+.ot-hvo-text {
+  top: 13%;
+  left: 0%;
+}
+
+.avarini-sbros-text {
+  top: 4%;
+  left: 41%;
+}
+
+.par-v-otdelenii-activatsi-text {
+  top: 4%;
+  right: 19%;
+}
+
+.borov-soedinitelni-text {
+  top: 18%;
+  left: 0%;
+  text-align: left;
+  max-width: 140px;
+}
+.pech-doziga-gazov-text {
+  top: 19.5%;
+  left: 15%;
+}
+
+.dymosos-text {
+  top: 24%;
+  right: 22%;
+}
+
+.kotel-utilizator-text {
+  top: 37%;
+  right: 31%;
+}
+
+.vyhod-dymovyh-gazov-text {
+  top: 30%;
+  right: -4%;
+  max-width: 103px;
+  text-align: left;
+}
+.mokriy-skruber-text {
+  top: 72%;
+  right: 15%;
+}
+
+.topka-text {
+  top: 56%;
+  right: 36%;
+}
+
+.vanna-skrubbera-text {
+  top: 84%;
+  right: 19%;
+  z-index: 1;
+}
+.goriz-vibrotransporter-text {
+  max-width: 150px;
+  top: 89%;
+  right: 39%;
+}
+
+.vr-pech-carboniz-text {
+  top: 57%;
+  left: 29%;
+}
+
+.hvo-text {
+  top: 80%;
+  left: 45%;
+}
+.holodilnik-text {
+  top: 72%;
+  left: 35%;
+}
+
+.grohot-text {
+  top: 80%;
+  left: 26%;
+}
+
+.elevator-text {
+  top: 76%;
+  left: 17%;
+}
+
+.zagruzka-granul-text {
+  left: 4%;
+  bottom: 22%;
+}
+
+.notis-status-text {
+  left: 3%;
+  bottom: 20%;
+}
+
+.niz-zagr-kam-text {
+  text-align: left;
+  max-width: 70px;
+  left: 7.5%;
+  bottom: 31.5%;
+}
+.vniz-kamery-zagruzki-text {
+  text-align: left;
+  max-width: 70px;
+  left: 7.5%;
+  bottom: 50%;
+}
+.vverh-kamery-zagruzki-text {
+  text-align: left;
+  max-width: 70px;
+  left: 7.5%;
+  bottom: 40%;
+}
+.vigruzka-kam-text {
+  bottom: 20%;
+  right: 37%;
+}
+
+.im5-text {
+  top: 10%;
+  left: 35.5%;
+}
+
+// ------------------------------------
+
+// lab
+.lab-current {
+  max-width: 385px;
+  position: absolute;
+  top: 22.9%;
+  left: 7.4%;
+  z-index: 2;
+}
+
+@media (max-width: 1280px) {
+  .mnemo {
+    position: relative;
+    width: 976px;
+
+    &-header {
+      max-width: 840px;
+    }
+
+    &__img {
+      width: 976px;
+    }
+  }
+
+  .mnemo__param {
+    &-text {
+      font-size: 12px;
+      line-height: 12px;
+    }
+    &-descr {
+      font-size: 10px;
+      line-height: 10px;
+    }
+  }
+
+  .mnemo__gif {
+    &-1 {
+      top: 62.2%;
+      left: 60%;
+    }
+    &-2 {
+      top: 27.8%;
+      left: 73.8%;
+      & img {
+        width: 40px;
+        height: 37px;
+      }
+    }
+    &-3 {
+      top: 33.3%;
+      right: -55px;
+    }
+    &-4, &-5 {
+      left: 18.2%;
+      & img {
+        width: 31px;
+        height: 28px;
+      }
+    }
+  }
+
+  .lab-current {
+    top: 22.2%;
+    left: 7.5%;
+  }
+
+  .siren-container {
+    top: 300px;
+    left: 450px;
+  }
+
+  .vyhod-dymovyh-gazov-text {
+    top: 32%;
+    right: -7%;
+  }
+  .p-gazov-posle-scrubber {
+    bottom: 53%;
+    right: -4%;
+  }
+  .uroven-v-barabane-kotla {
+    top: 25%;
+    left: 54.1%;
+  }
+  .razr-v-prostranstve-kotla {
+    top: 30.3%;
+    left: 54.1%;
+  }
+  .gazy-kotla-utilizazi {
+    left: 54.1%;
+  }
+
+  .mosh-gorelky {
+    top: 60.5%;
+    right: 39%;
+  }
+
+  .temper-v-topke {
+    right: 39%;
+  }
+
+  .im5-percent {
+    top: 11.6%;
+    left: 35.1%;
+  }
+
+  .kran {
+    &-1 {
+      bottom: 7%;
+    }
+
+    &-2 {
+      bottom: 13%;
+      right: 61%;
+    }
+
+    &-5 {
+      top: 14.7%;
+      left: 35%;
+    }
+
+    &-6 {
+      top: 15%;
+      left: 35.65%;
+    }
+  }
+
+}

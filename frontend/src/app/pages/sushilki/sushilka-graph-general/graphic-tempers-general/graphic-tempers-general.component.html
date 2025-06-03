@@ -1,0 +1,45 @@
+<div class="graph-general">
+  <div class="graph-general__container">
+
+    <!-- Кнопки для выбора временного диапазона -->
+    <div class="graph-general__btns">
+        <app-control-button [isActive]="activeButton === 10" (onClick)="setTimeRange(10)" iconName="forward_10 ">
+        10 минут
+      </app-control-button>
+      <app-control-button [isActive]="activeButton === 30" (onClick)="setTimeRange(30)" iconName="forward_30 ">
+        30 минут
+      </app-control-button>
+    </div>
+
+    <!-- График для сушилки 1 -->
+    <div class="graph-general__content">
+      <app-universal-graph
+        [apiUrls]="sushilka1ApiUrls"
+        [parameterNamesList]="sushilka1ParameterNamesList"
+        [units]="'°C'"
+        [dataKeys]="sushilka1DataKeys"
+        [yAxisTitle]="'Температуры, градусы'"
+        [title]="'Сушилка №' + sushilka1Number + ': Температура'"
+        [yAxisRange]="{ min: 0, max: 600 }"
+        [graphId]="sushilka1Id"
+        [timeRange]="timeRange"
+      ></app-universal-graph>
+    </div>
+
+    <!-- График для сушилки 2 -->
+    <div class="graph-general__content">
+      <app-universal-graph
+        [apiUrls]="sushilka2ApiUrls"
+        [parameterNamesList]="sushilka2ParameterNamesList"
+        [units]="'°C'"
+        [dataKeys]="sushilka2DataKeys"
+        [yAxisTitle]="'Температуры, градусы'"
+        [title]="'Сушилка №' + sushilka2Number + ': Температура'"
+        [yAxisRange]="{ min: 0, max: 600 }"
+        [graphId]="sushilka2Id"
+        [timeRange]="timeRange"
+      ></app-universal-graph>
+    </div>
+
+  </div>
+</div>

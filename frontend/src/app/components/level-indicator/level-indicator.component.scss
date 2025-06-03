@@ -1,0 +1,31 @@
+.mnemo__level {
+  &-container {
+    position: absolute;
+    overflow: hidden;
+    background-color: transparent;
+    display: flex;
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
+  }
+
+  &-fill {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    transition: height 0.3s ease, background-color 0.5s ease;
+  }
+
+  &-percentage {
+    position: absolute; /* Позиционируем поверх контейнера */
+    z-index: 1; /* Убедимся, что текст поверх fill */
+    font-size: 16px; /* Размер текста */
+    font-weight: bold; /* Жирный шрифт */
+    color: black; /* Цвет текста */
+  }
+}
+
+@media (max-width: 1280px) {
+ .mnemo__level-percentage {
+  font-size: 12px; /* Размер текста */
+ }
+}
