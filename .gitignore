@@ -11,4 +11,5 @@ frontend/node_modules
 frontend/.vscode
 frontend/public/content
 frontend/public/video
+
 frontend/.env
