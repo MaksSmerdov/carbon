@@ -27,7 +27,7 @@
 Клонирование репозитория:
 
 ```bash
-git clone https://github.com/kaskad-saim/carbon-server
+git clone https://github.com/MaksSmerdov/carbon
 ```
 
 Установка зависимостей:
